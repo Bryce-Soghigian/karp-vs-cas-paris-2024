@@ -5,7 +5,7 @@ CLUSTER_NAME="cost-optimized-cas"
 LOCATION="eastus" 
 
 az group create --name $RG_NAME --location $LOCATION 
-az aks create --resource-group $RG_NAME --name $CLUSTER_NAME --node-count 3 --enable-addons monitoring --generate-ssh-keys --sku Standard --enable-cluster-autoscaler --min-count 1 --max-count 10 --node-vm-size Standard_DS2_v2 --cluster-autoscaler-profile scan-interval=30s,scale-down-unneeded-time=3m,scale-down-unready-time=3m,max-graceful-termination-sec=30,skip-nodes-with-local-storage=false,max-empty-bulk-delete=1000,max-total-unready-percentage=100,ok-total-unready-count=1000,scale-down-delay-after-add=10m --enable-cost-analysis
+az aks create --resource-group $RG_NAME --name $CLUSTER_NAME --node-count 3 --enable-addons monitoring --generate-ssh-keys --tier Standard --enable-cluster-autoscaler --min-count 1 --max-count 10 --node-vm-size Standard_DS2_v2 --cluster-autoscaler-profile scan-interval=30s,scale-down-unneeded-time=3m,scale-down-unready-time=3m,max-graceful-termination-sec=30,skip-nodes-with-local-storage=false,max-empty-bulk-delete=1000,max-total-unready-percentage=100,ok-total-unready-count=1000,scale-down-delay-after-add=10m --enable-cost-analysis
 
 az aks get-credentials --resource-group $RG_NAME --name $CLUSTER_NAME
 kubectl taint nodes CriticalAddonsOnly=true:NoSchedule --all --overwrite

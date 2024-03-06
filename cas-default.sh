@@ -1,12 +1,12 @@
 
 az account set --subscription $LG_SUB
 # Create a resource group 
-RG_NAME="default-cas"
-CLUSTER_NAME="default-cas" 
+RG_NAME="default-ca"
+CLUSTER_NAME="default-ca" 
 LOCATION="eastus" 
 
 az group create --name $RG_NAME --location $LOCATION 
-az aks create --resource-group $RG_NAME --name $CLUSTER_NAME --node-count 3 --enable-addons monitoring --generate-ssh-keys --sku Standard --enable-cluster-autoscaler --min-count 1 --max-count 10 --node-vm-size Standard_DS2_v2 --enable-cost-analysis
+az aks create --resource-group $RG_NAME --name $CLUSTER_NAME --node-count 3 --enable-addons monitoring --generate-ssh-keys --tier Standard --enable-cost-analysis
 az aks get-credentials --resource-group $RG_NAME --name $CLUSTER_NAME
 kubectl taint nodes CriticalAddonsOnly=true:NoSchedule --all --overwrite
 
